@@ -10,8 +10,6 @@ Essentially, you type in the *grains* and *pillar* data you want, write your *st
 
 If things go well, it produces the *state* in the *output* to make sure it rendered correctly. If an error has occured it should tell you with relative accuracy where it went wrong.
 
-> Important to note that using mutliline comments `{# multiline comment #}` is currently not supported and will throw possibly confusing `yaml` syntax errors at you!
-
 ***But, why?***
 
 Figuring out where and why your state broke can be an arduous task, 
@@ -21,8 +19,24 @@ or just debugging that one state you just can't seem to fix.
 
 I hope you enjoy it
 
+----------------------------------------------------------------------
 
-DEPENDENCIES
+Features
+=============================
+
+#### Current
+- Renders Jinja2 and YAML
+
+#### Future
+
+- Shareable links *to share with others for help*
+- Proper salt integration, to use salt modules
+
+#### Improvements
+
+> Support for multiline comments `{# multiline comment #}` *throws some confusing `yaml` syntax errors*
+
+Dependencies
 =============================
 
 python 2.7
@@ -33,7 +47,7 @@ python 2.7
  pip install jinja2
 ```
 
-USAGE
+Usage
 =============================
 
 ```bash
@@ -44,16 +58,16 @@ USAGE
 Browse to `localhost:5000`
 
 
-DOCKER (linux)
+Docker (linux)
 =============================
 
-### BUILD CONTAINER
+#### Build container
 
 ```bash
 ~/git$ docker build jinjabread/
 ```
 
-### TEST CONTAINER
+#### Test container
 
 ```bash
 ~/git$ docker run -d -p 80:80 --name jinjabread jinjabread
@@ -66,7 +80,7 @@ DOCKER (linux)
 
 Browse to `localhost/`
 
-ACKNOWLEDGEMENTS
+Acknowledgements
 =============================
 
 [Codemirror](https://codemirror.net)
