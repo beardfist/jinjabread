@@ -2,6 +2,23 @@
 
 ![jinjabread](http://i.imgur.com/HbGvgSj.png)
 
+**Jinjabread** is a very simple jinja syntax checking tool for creating [SaltStack](https://www.saltstack.com) states.
+
+It's divided into 4 windows, *Grains*, *Pillar*, *State* and *Output*, assuming you're familiar with SaltStack this does not requirement much explanation.
+
+Essentially, you type in the *grains* and *pillar* data you want, write your *state* template with your *jinja2*, press `ctrl+b` or click the render button.
+
+If things go well, it produces the *state* in the *output* to make sure it rendered correctly. If an error has occured it should tell you with relative accuracy where it went wrong.
+
+> Important to note that using mutliline comments `{# multiline comment #}` is currently not supported and will throw possibly confusing `yaml` syntax errors at you!
+
+***But, why?***
+Figuring out where and why your state broke can be an arduous task, 
+especially if you are just starting out with SaltStack for the first time.
+
+I hope you enjoy it
+
+
 DEPENDENCIES
 =============================
 
@@ -24,6 +41,7 @@ USAGE
 =============================
 
 ```bash
+~/git$ git clone https://github.com/Inveracity/jinjabread.git
 ~/git/jinjabread$ python __init__.py
 ```
 
