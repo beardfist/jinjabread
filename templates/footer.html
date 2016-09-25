@@ -1,0 +1,97 @@
+<!-- START OF FOOTER -->
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-1.12.3.js')}}"    > </script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-linedtextarea.js')}}"    > </script>
+<script type="text/javascript" src="{{ url_for('static', filename='codemirror.js')}}"    > </script>
+<script type="text/javascript" src="{{ url_for('static', filename='jinja2.js')}}"    > </script>
+<script type="text/javascript" src="{{ url_for('static', filename='yaml.js')}}"    > </script>
+<script type="text/javascript" src="{{ url_for('static', filename='simplescrollbars.js')}}"    > </script>
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("state"), {
+    mode:{ name: "jinja2", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple",
+        viewportMargin: 700
+});
+</script>
+
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("pillar"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("grains"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("output"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+editor.setOption("extraKeys", {
+  Tab: function(cm) {
+    var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+    cm.replaceSelection(spaces);
+  }
+});
+</script>
+
+<script>
+function KeyPress(e) {
+      var evtobj = window.event? event : e
+      if (evtobj.keyCode == 66 && evtobj.ctrlKey) document.forms[0].submit();//alert("Ctrl+b");
+}
+
+document.onkeydown = KeyPress;
+</script>
+</body>
+</html> 
