@@ -83,6 +83,11 @@ Browse to `localhost/`
 Acknowledgements
 =============================
 
-[Codemirror](https://codemirror.net)
+[Codemirror](https://codemirror.net) - Code highlighting in textarea
 
-[Bootstrap 3](https://getbootstrap.com)
+[Bootstrap3](https://getbootstrap.com) - general styling
+
+[jqueryUI](https://jqueryui.com/) - Resizable divs
+
+[PersistState](https://github.com/togakangaroo/persistState) - persist jqueryUI through refresh
+
