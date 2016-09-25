@@ -2,6 +2,8 @@
 
 ![jinjabread](http://i.imgur.com/HbGvgSj.png)
 
+![resizable](http://i.imgur.com/LYyvrSj.gif)
+
 **Jinjabread** is a very simple jinja syntax checking tool for creating [SaltStack](https://www.saltstack.com) states.
 
 It's divided into 4 windows, *Grains*, *Pillar*, *State* and *Output*, assuming you're familiar with SaltStack this does not require much explanation. If none of that makes sense, SaltStack is a *Remote Execution Framework* with *Configuration Management* capabilities. If you're a sysadmin/devops/ITguy supporting IT infrastructure of any size, SaltStack is great and you should check it out. 
