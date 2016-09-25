@@ -34,7 +34,7 @@ Features
 
 #### Improvements
 
-> Support for multiline comments `{# multiline comment #}` *throws some confusing `yaml` syntax errors*
+- Support for multiline comments `{# multiline comment #}` *throws some confusing `yaml` syntax errors*
 
 Dependencies
 =============================
