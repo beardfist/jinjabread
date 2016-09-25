@@ -36,6 +36,10 @@ Features
 
 - Support for multiline comments `{# multiline comment #}` *throws some confusing `yaml` syntax errors*
 
+#### Known issues
+
+- Does not work in *Internet Explorer*
+
 Dependencies
 =============================
 
