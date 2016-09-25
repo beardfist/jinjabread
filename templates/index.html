@@ -4,24 +4,24 @@
 
 <!-- Page Content  -->
 <form action="" name="render" method="post">
-<div class="container-fluid fill">
+<div class="container-fluid fill" style="position: relative;">
     <div class="row" > <!--  -->
-        <div class="col-xs-2 col-sm-2"><!--<div class="form-group">--><!--<div class="row" >  style="width:600px"> -->
+        <div class="col-xs-2 col-sm-2 resizable" id="persist-state1" style="width:100%"><!--<div class="form-group">--><!--<div class="row" >  style="width:600px"> -->
             <label for="grains" style="color:white; font-family:Consolas">Grains:</label>
-                <textarea id="grains" name="grains">{{ formdata['grains'][0] }}</textarea></div>
+                <textarea id="grains" name="grains" style="box-sizing: border-box">{{ formdata['grains'][0] }}</textarea></div>
 
 
-        <div class="col-xs-2 col-sm-2">
+        <div class="col-xs-2 col-sm-2 resizable" id="persist-state2">
             <label for="pillar" style="color:white; font-family:Consolas">Pillar:</label>
                 <textarea id="pillar" name="pillar">{{ formdata['pillar'][0] }}</textarea></div>
 
 
-        <div class="col-xs-5 col-sm-5">
+        <div class="col-xs-5 col-sm-5 resizable" id="persist-state3">
             <label for="state" style="color:white; font-family:Consolas">State:</label>
                 <textarea id="state" name="state" >{{ formdata['state'][0]  }}</textarea></div>
 
         
-        <div class="col-xs-3 col-sm-3">
+        <div class="col-xs-3 col-sm-3 resizable" id="persist-state4">
             <label for="output" style="color:white; font-family:Consolas">Output:</label>
                 <textarea id="output" name="output" >{{ output[0] }} </textarea>
 
