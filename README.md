@@ -4,7 +4,7 @@
 
 **Jinjabread** is a very simple jinja syntax checking tool for creating [SaltStack](https://www.saltstack.com) states.
 
-It's divided into 4 windows, *Grains*, *Pillar*, *State* and *Output*, assuming you're familiar with SaltStack this does not requirement much explanation.
+It's divided into 4 windows, *Grains*, *Pillar*, *State* and *Output*, assuming you're familiar with SaltStack this does not require much explanation. If none of that makes sense, SaltStack is a *Remote Execution Framework* with *Configuration Management* capabilities. If you're a sysadmin/devops/ITguy supporting IT infrastructure of any size, SaltStack is great and you should check it out. 
 
 Essentially, you type in the *grains* and *pillar* data you want, write your *state* template with your *jinja2*, press `ctrl+b` or click the render button.
 
@@ -13,8 +13,11 @@ If things go well, it produces the *state* in the *output* to make sure it rende
 > Important to note that using mutliline comments `{# multiline comment #}` is currently not supported and will throw possibly confusing `yaml` syntax errors at you!
 
 ***But, why?***
+
 Figuring out where and why your state broke can be an arduous task, 
 especially if you are just starting out with SaltStack for the first time.
+This tool aims to help either getting started writing *states*,
+or just debugging that one state you just can't seem to fix.
 
 I hope you enjoy it
 
@@ -29,13 +32,6 @@ python 2.7
  pip install pyyaml
  pip install jinja2
 ```
-
-ACKNOWLEDGEMENTS
-=============================
-
-[Codemirror](https://codemirror.net)
-
-[Bootstrap 3](https://getbootstrap.com)
 
 USAGE
 =============================
@@ -69,3 +65,10 @@ DOCKER (linux)
 ```
 
 Browse to `localhost/`
+
+ACKNOWLEDGEMENTS
+=============================
+
+[Codemirror](https://codemirror.net)
+
+[Bootstrap 3](https://getbootstrap.com)
