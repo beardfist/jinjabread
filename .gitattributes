@@ -1,0 +1,4 @@
+static/css/*.css linguist-vendored
+templates/*.html linguist-vendored
+static/js/*.js linguist-vendored
+static/*.js linguist-vendored
