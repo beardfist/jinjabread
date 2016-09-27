@@ -70,7 +70,7 @@ Docker (linux)
 #### Build container
 
 ```bash
-~/git$ docker build jinjabread/
+~/git$ docker build jinjabread/ -t jinjabread
 ```
 
 #### Test container
