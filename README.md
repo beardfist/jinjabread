@@ -1,5 +1,7 @@
 # jinjabread
 
+>**Disclaimer**: It's an early prototype full of unexpected behavior like throwing nondescript errors when using single quotes when it expects double quotes. I fully intend to rip out the prototype code and replace it with proper salt template rendering code. Just have to find the time to dig into it.
+
 ![jinjabread](http://i.imgur.com/HbGvgSj.png)
 
 ![resizable](http://i.imgur.com/LYyvrSj.gif)
@@ -8,7 +10,7 @@
 
 It's divided into 4 windows, *Grains*, *Pillar*, *State* and *Output*, assuming you're familiar with SaltStack this does not require much explanation. If none of that makes sense, SaltStack is a *Remote Execution Framework* with *Configuration Management* capabilities. If you're a sysadmin/devops/ITguy supporting IT infrastructure of any size, SaltStack is great and you should check it out. 
 
-Essentially, you type in the *grains* and *pillar* data you want, write your *state* template with your *jinja2*, press `ctrl+b` or click the render button.
+**Essentially**, you type in the *grains* and *pillar* data you want, write your *state* template with your *jinja2*, press `ctrl+b` or click the render button.
 
 If things go well, it produces the *state* in the *output* to make sure it rendered correctly. If an error has occured it should tell you with relative accuracy where it went wrong.
 
