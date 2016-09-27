@@ -22,7 +22,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Bundle app source
 RUN mkdir -p /var/www/jinjabread/jinjabread
 
-COPY favicon.ico /var/www/jinjabread/jinjabread/favicon.ico
+COPY static/favicon.ico /var/www/jinjabread/jinjabread/favicon.ico
 COPY functions    /var/www/jinjabread/jinjabread/functions
 COPY static      /var/www/jinjabread/jinjabread/static
 COPY templates   /var/www/jinjabread/jinjabread/templates
