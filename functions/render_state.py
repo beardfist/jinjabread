@@ -1,6 +1,6 @@
-# apt-get install python-pip
-# pip install pyyaml
-# pip install jinja2
+#-*- encoding: utf-8 -*-
+from salt import saltyaml
+
 import yaml
 from jinja2 import Template
 import re
@@ -33,7 +33,7 @@ def pre_render_test(state):
         #print line
     
     pre_state = '\n'.join(pre_state_format)
-    pre_test_render = yaml.safe_load(pre_state)
+    pre_test_render = saltyaml.render(pre_state)
     return pre_state
 
 def post_render_test(rendered_template):
@@ -46,7 +46,7 @@ def post_render_test(rendered_template):
         prettify.append(line)
     
     filtered_template = '\n'.join(prettify)
-    test_render = yaml.safe_load(rendered_template)
+    test_render = saltyaml.render(rendered_template)
     return [filtered_template, test_render]
 
 def mash(grains, pillar, state):
@@ -87,7 +87,7 @@ def mash(grains, pillar, state):
         return completed_render
 
     except Exception as e:
-        return [str(e).replace("found","find"), "fail"]
+        return [str(e).replace("could not found","could not find"), "fail"]
 
 
 dummydata = {"pillar":["""\
@@ -142,7 +142,7 @@ set secret:
     - context:
         secret: {{ secret }}
 {% endif %}
-
+asd
 eth0:
   network.managed:
     - dns:
