@@ -11,16 +11,39 @@ test4: {{ number }}
 
 {# ====== TEST: Loop over list ====== #}
 {% set nameservers = pillar['ns'] %}
-test1:
+test:
 {% for ip in nameservers %}
   - {{ ip }}
 {% endfor %}
 {# ====== END ====== #}
 
-{# ====== TEST:FAIL_ON_PURPOSE Conflicting ID ====== #}
+{# ====== TEST: Get nested pillar ====== #}
+{% set eggs = pillar['nest']['bird'] %}
+omellete:
+{% for egg in eggs %}
+  - {{ egg }}
+{% endfor %}
+{# ====== END ====== #}
+
+{# ====== TEST: Loop over split string ====== #}
+list:
+{% for thing in "a/b/c/d".split('/') %}
+  - {{ thing }}
+{% endfor %}
+{# ====== END ====== #}
+
+{# ====== TEST: FAIL_ON_PURPOSE Conflicting ID ====== #}
 {% set nameservers = pillar['ns'] %}
 {% for ip in nameservers %}
-test1:
+test:
   - {{ ip }}
 {% endfor %}
+{# ====== END ====== #}
+
+{# ====== TEST: FAIL_ON_PURPOSE could not find expected ':' ====== #}
+stuff:
+  and a thing
+
+test
+morestuff: sdfsdf
 {# ====== END ====== #}
