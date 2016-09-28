@@ -1,4 +1,4 @@
-# jinjabread
+# jinjabread v0.1
 
 >**Disclaimer**: It's an early prototype full of unexpected behavior like throwing nondescript errors when using single quotes when it expects double quotes. I fully intend to rip out the prototype code and replace it with proper salt template rendering code. Just have to find the time to dig into it.
 
@@ -90,6 +90,8 @@ Browse to `localhost/`
 
 Acknowledgements
 =============================
+
+[SaltStack](https://www.saltstack.com) - Extensive use of their code from github
 
 [Codemirror](https://codemirror.net) - Code highlighting in textarea
 
