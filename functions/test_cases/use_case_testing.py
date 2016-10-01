@@ -1,4 +1,12 @@
+#-*- encoding: utf-8 -*-
+import os
+import sys
 import traceback
+
+
+path = os.sep.join(__file__.split(os.sep)[:-2])
+sys.path.append(path)
+
 from render_state import mash
 
 with open('test_grains.yml', 'r') as g:

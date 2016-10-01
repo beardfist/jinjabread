@@ -17,7 +17,7 @@ def index():
     output = ""
     if request.method == 'POST':
         form_data=dict(request.form)
-
+        
         output = render_state.mash(form_data['grains'][0], form_data['pillar'][0], form_data['state'][0])
     else: 
         form_data=render_state.dummydata

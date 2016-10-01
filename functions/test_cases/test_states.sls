@@ -19,7 +19,7 @@ test:
 
 {# ====== TEST: Get nested pillar ====== #}
 {% set eggs = pillar['nest']['bird'] %}
-omellete:
+omelette:
 {% for egg in eggs %}
   - {{ egg }}
 {% endfor %}
