@@ -19,9 +19,9 @@ from yaml import load
 from .yamlloader import SaltYamlSafeLoader
 from .odict import OrderedDict
 from .saltexceptions import SaltRenderError
-import six as six
-from .six import string_types
-from .six.moves import range
+from .six import six
+from .six.six import string_types
+from .six.six.moves import range
 
 log = logging.getLogger(__name__)
 

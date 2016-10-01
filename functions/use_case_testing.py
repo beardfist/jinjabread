@@ -1,3 +1,4 @@
+import traceback
 from render_state import mash
 
 with open('test_grains.yml', 'r') as g:
@@ -38,15 +39,17 @@ def parse_state_tests(states):
 
 lj=60
 for state in parse_state_tests(states):
+
 	test = mash(grains, pillar, state[0])
+
 
 	if test[1] == "fail" and not "FAIL_ON_PURPOSE" in state[1]:
 		print state[1].ljust(lj, '-') + " FAILED"
-		#print test[0]
+		print test[0]
 
 	elif test[1] != "fail" and "FAIL_ON_PURPOSE" in state[1]:
 		print state[1].ljust(lj, '-') + " FAILED"
-		#print test[0]
+		print test[0]
 	else:
 		print state[1].ljust(lj, '-') + " OK"
 	

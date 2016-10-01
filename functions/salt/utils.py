@@ -34,13 +34,13 @@ import string
 import subprocess
 
 # Import 3rd-party libs
-import six
+from .six import six
 # pylint: disable=import-error
-from six.moves.urllib.parse import urlparse  # pylint: disable=no-name-in-module
+from .six.six.moves.urllib.parse import urlparse  # pylint: disable=no-name-in-module
 # pylint: disable=redefined-builtin
-from six.moves import range
-from six.moves import zip
-from six.moves import map
+from .six.six.moves import range
+from .six.six.moves import zip
+from .six.six.moves import map
 from stat import S_IMODE
 # pylint: enable=import-error,redefined-builtin
 

@@ -10,7 +10,7 @@ import logging
 import time
 
 # Import Salt libs
-import six as six
+from .six import six
 
 log = logging.getLogger(__name__)
 

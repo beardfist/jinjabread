@@ -87,6 +87,7 @@ def mash(grains, pillar, state):
         return completed_render
 
     except Exception as e:
+        print traceback.format_exc()
         return [str(e).replace("could not found","could not find"), "fail"]
 
 
