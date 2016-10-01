@@ -1,0 +1,4 @@
+## Shareable links (yes|true|no|false)
+enable_shareable_links: yes
+# How many links to retain at any given time (int)
+link_history_size: 100

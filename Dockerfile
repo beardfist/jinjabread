@@ -23,10 +23,12 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir -p /var/www/jinjabread/jinjabread
 
 COPY static/favicon.ico /var/www/jinjabread/jinjabread/favicon.ico
-COPY functions    /var/www/jinjabread/jinjabread/functions
-COPY static      /var/www/jinjabread/jinjabread/static
-COPY templates   /var/www/jinjabread/jinjabread/templates
-COPY __init__.py   /var/www/jinjabread/jinjabread/__init__.py
+COPY functions          /var/www/jinjabread/jinjabread/functions
+COPY static             /var/www/jinjabread/jinjabread/static
+COPY templates          /var/www/jinjabread/jinjabread/templates
+COPY config.yml         /var/www/jinjabread/jinjabread/config.yml
+COPY config.py          /var/www/jinjabread/jinjabread/config.py
+COPY __init__.py        /var/www/jinjabread/jinjabread/__init__.py
 
 COPY jinjabread.conf /etc/apache2/sites-available/jinjabread.conf
 

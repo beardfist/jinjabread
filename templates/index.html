@@ -37,7 +37,9 @@
             <p style="color:#8B8A68"> version 0.1 </p>
         </div>
         <div class="col-xs-6 col-sm-6">
-
+            {% for link in history %}
+                {{ link }} <br>
+            {% endfor %}
             <!-- {{ output[1] }} -->
         </div>    
     </div>

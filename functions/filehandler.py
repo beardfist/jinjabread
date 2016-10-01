@@ -1,6 +1,7 @@
 #-*- encoding: utf-8 -*-
 import os
 import sys
+import glob
 import uuid
 import json
 import shutil
@@ -41,7 +42,7 @@ cpuarch: x86_64
 ip4_nameservers:
   - 8.8.8.8
   - 8.8.4.4
-ip4_interfaces:
+ip4_interfaces: 
   eth0:
     - 192.168.1.3
 kernel: Linux
@@ -74,6 +75,16 @@ eth0:
         {% endfor %}
 """]}
 
+
+def get_history():
+    ''' returns list of files from history '''
+
+    files = glob.glob(cache+os.sep+"*")
+    files.sort(key=os.path.getmtime)
+    list_of_links = [f.split(os.sep)[-1] for f in files.__reversed__() ]
+
+    return list_of_links
+
 def _safe_size(payload):
     ''' if file size limit exceeds 500 kb return false '''
     if sys.getsizeof(payload) > 512000:
@@ -81,9 +92,11 @@ def _safe_size(payload):
     return True
 
 def _content_encode(content):
+    ''' base64 encode data '''
     return base64.b64encode(content)
 
 def _content_decode(content):
+    ''' decode base64 data '''
     return base64.b64decode(content)
 
 def _file_write(json, file_link_hash):
@@ -117,6 +130,7 @@ def save_content(payload):
         _file_write(data, link)
     else:
         raise Exception("Size of input data exceeds minimum allowance of 500kb")
+
     return link
 
 def load_content(link_id):
@@ -127,8 +141,8 @@ def load_content(link_id):
     return payload
 
 
-link = save_content(payload)
-data = load_content(link)
-
-from render_state import mash
-print mash(data['grains'][0], data['pillar'][0], data['state'][0])[0]
+#link = save_content(payload)
+#get_history()
+#data = load_content(link)
+#from render_state import mash
+#print mash(data['grains'][0], data['pillar'][0], data['state'][0])[0]
