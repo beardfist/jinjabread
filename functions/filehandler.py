@@ -122,6 +122,8 @@ def _file_link(json):
 
 def save_content(payload):
     ''' save content to a file if file does not exceed 500kb '''
+
+    # TODO: if at cache file limit, overwrite oldest file
     content = json.dumps(payload, ensure_ascii=False, encoding='utf-8', indent=4)
     data = _content_encode(content)
     
