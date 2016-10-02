@@ -1,5 +1,5 @@
 ## Shareable links (yes|true|no|false)
-# SHAREABLE LINKS BROKEN IN INSIDE CONTAINER, probably a permission setting or so, requires investigation.
+# SHAREABLE LINKS BROKEN INSIDE CONTAINER, probably a permission setting or so, requires investigation.
 enable_shareable_links: no 
 # How many links to retain at any given time (int)
 # note that each file created has a limit of 500kb
