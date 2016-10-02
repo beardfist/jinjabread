@@ -2,10 +2,7 @@
 import os
 import sys
 import glob
-import uuid
 import json
-import shutil
-import base64
 
 # Create cache dir in project root
 cache = os.sep.join(__file__.split(os.sep)[:-2])+os.sep+"cache"
@@ -23,9 +20,10 @@ def _delete_file(filename):
 
 def _safe_size(payload, limit):
     ''' if file size limit return false '''
+    
     limit = limit * 1024
     size = sys.getsizeof(payload)
-    print "size" + str(size)
+    
     if size > limit:
         return False
     return True
@@ -54,12 +52,14 @@ def _file_load(file_link_hash):
 
 def _file_link(json):
     ''' generates hash based on file content '''
-    print hash(json).__abs__()
+
     return str(hex(hash( json ).__abs__()).replace('0x', "").upper())
 
 
 def get_history(conf):
-    ''' returns list of files from history, and removes the oldest if list exceeds cache limit '''
+    ''' returns list of files from history, 
+        and removes the oldest if list exceeds cache limit '''
+
     limit = conf['link_history_size']
     files = glob.glob(cache+os.sep+"*")
     files.sort(key=os.path.getmtime)
@@ -73,7 +73,9 @@ def get_history(conf):
 
 
 def save_content(payload, conf):
-    ''' save content to a file if file does not exceed link_history_file_size '''
+    ''' save content to a file if file does not exceed 
+        link_history_file_size '''
+
     limit = conf['link_history_file_size']
     content = json.dumps(payload, ensure_ascii=False, encoding='utf-8')
     
@@ -92,7 +94,8 @@ def load_content(link_id):
     content = _file_load(link_id)
 
     try:
-        payload = json.loads(content, encoding='utf-8') #special characters don't work to well here sadly
+        #special characters don't work to well here sadly
+        payload = json.loads(content, encoding='utf-8') 
     except:
         return False
         

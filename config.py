@@ -8,8 +8,9 @@ def config():
     user_conf = ""
     raw_conf = ""    
     defaults = {
-        'enable_shareable_links':True,
-        'link_history_size':10
+        'link_history_enabled':True,
+        'link_history_size':500,
+        'link_history_file_size':10
     }
     
     #Read config file

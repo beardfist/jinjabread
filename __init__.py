@@ -55,7 +55,7 @@ def index(linkid=""):
                 'index.html', 
                 formdata     = form_data, 
                 output       = output,
-                shareable    = conf['enable_shareable_links'],
+                shareable    = conf['link_history_enabled'],
                 history      = history,
                 current_link = current_link 
                 )
