@@ -14,67 +14,6 @@ try:
 except:
     pass
 
-payload = {"pillar":["""\
-secret: 1A2B3C4D5E6F
-ns:
-  - 12.34.45.1
-  - 12.34.45.2
-"""], 
-"grains":["""\
-host: minion
-id: minion.domain.net
-domain: domain.net
-fqdn: minion.domain.net
-fqdn_ip4:
-  - 192.168.1.3
-saltversion: 2016.3.3
-os: Debian
-os_family: Debian
-osarch: amd64
-oscodename: jessie
-osfinger: Debian-8
-osfullname: Debian
-osmajorrelease: '8'
-osrelease: '8.2'
-biosreleasedate: 01/01/2011
-biosversion: Bochs
-cpuarch: x86_64
-ip4_nameservers:
-  - 8.8.8.8
-  - 8.8.4.4
-ip4_interfaces: 
-  eth0:
-    - 192.168.1.3
-kernel: Linux
-localhost: minion.domain.net
-mem_total: 2010
-num_cpus: 2
-
-"""], 
-"state":["""\
-{% set secret = pillar['secret'] %}
-{% set domain = grains['domain'] %}
-{% set osfinger = salt['grains.get']('osfinger') %}
-{% set nameservers = salt['pillar.get']('ns') %}
-
-{% if domain == 'domain.net' %}
-set secret:
-  file.managed:
-    - name: /etc/secret
-    - source: salt://state/secret
-    - template: jinja
-    - context:
-        secret: {{ secret }}
-{% endif %}
-
-eth0:
-  network.managed:
-    - dns:
-        {% for ip in nameservers %}
-      - {{ ip }}
-        {% endfor %} 
-"""]}
-
 
 def _delete_file(filename):
     ''' delete a file '''
@@ -82,24 +21,14 @@ def _delete_file(filename):
     os.remove(cache+os.sep+filename)
 
 
-def _safe_size(payload):
-    ''' if file size limit exceeds 500 kb return false '''
-    
-    if sys.getsizeof(payload) > 512000:
+def _safe_size(payload, limit):
+    ''' if file size limit return false '''
+    limit = limit * 1024
+    size = sys.getsizeof(payload)
+    print "size" + str(size)
+    if size > limit:
         return False
     return True
-
-
-def _content_encode(content):
-    ''' base64 encode data '''
-    
-    return base64.b64encode(content)
-
-
-def _content_decode(content):
-    ''' decode base64 data '''
-    
-    return base64.b64decode(content)
 
 
 def _file_write(base64_string, file_link_hash):
@@ -125,35 +54,34 @@ def _file_load(file_link_hash):
 
 def _file_link(json):
     ''' generates hash based on file content '''
-
+    print hash(json).__abs__()
     return str(hex(hash( json ).__abs__()).replace('0x', "").upper())
 
 
-def get_history(cache_limit):
+def get_history(conf):
     ''' returns list of files from history, and removes the oldest if list exceeds cache limit '''
-
+    limit = conf['link_history_size']
     files = glob.glob(cache+os.sep+"*")
     files.sort(key=os.path.getmtime)
     list_of_links = [ f.split(os.sep)[-1] for f in files.__reversed__() ]
 
-    if len(list_of_links) > cache_limit:
+    if len(list_of_links) > limit:
         _delete_file(list_of_links[-1])
         list_of_links = list_of_links[:-1]
 
     return list_of_links
 
 
-def save_content(payload):
-    ''' save content to a file if file does not exceed 500kb '''
-
-    content = json.dumps(payload, ensure_ascii=False, encoding='utf-8', indent=4)
-    data = _content_encode(content)
+def save_content(payload, conf):
+    ''' save content to a file if file does not exceed link_history_file_size '''
+    limit = conf['link_history_file_size']
+    content = json.dumps(payload, ensure_ascii=False, encoding='utf-8')
     
-    if _safe_size(data):
+    if _safe_size(content, limit):
         link = _file_link(content)
-        _file_write(data, link)
+        _file_write(content, link)
     else:
-        raise Exception("Size of input data exceeds minimum allowance of 500kb")
+        return "size_limit_exceeded!"
 
     return link
 
@@ -162,17 +90,17 @@ def load_content(link_id):
     ''' get file content, return as dictionary '''
     
     content = _file_load(link_id)
-    if content:
-        data = _content_decode(content)
-        payload = json.loads(data, encoding='utf-8') #special characters don't work to well here sadly
-    else:
+
+    try:
+        payload = json.loads(content, encoding='utf-8') #special characters don't work to well here sadly
+    except:
         return False
         
     return payload
 
+# -- testing --
+#from render_state import mash
 
 #link = save_content(payload)
-#get_history(0)
 #data = load_content(link)
-#from render_state import mash
 #print mash(data['grains'][0], data['pillar'][0], data['state'][0])[0]

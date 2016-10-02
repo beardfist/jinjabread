@@ -33,7 +33,7 @@ def index(linkid=""):
                         form_data['state'][0])
 
         if 'save' in form_data.keys():
-            filehandler.save_content(form_data)
+            filehandler.save_content(form_data, conf)
 
     else: 
         form_data = render_state.dummydata
@@ -44,7 +44,7 @@ def index(linkid=""):
         if not form_data:
             linkid = ""
     
-    history = filehandler.get_history(conf['link_history_size'])
+    history = filehandler.get_history(conf)
 
     if history:
         current_link = history[0]
@@ -53,10 +53,10 @@ def index(linkid=""):
 
     return render_template(
                 'index.html', 
-                formdata  = form_data, 
-                output    = output,
-                shareable = conf['enable_shareable_links'],
-                history   = history,
+                formdata     = form_data, 
+                output       = output,
+                shareable    = conf['enable_shareable_links'],
+                history      = history,
                 current_link = current_link 
                 )
 
