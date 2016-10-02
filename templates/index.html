@@ -33,17 +33,24 @@
         <div class="col-xs-6 col-sm-6" onKeyPress="return checkSubmit(event)">
             <br />
             <input type="submit" value="ctrl+b to render state" class="btn btn-primary" style="background-color:#695112; border-color:#7e721c">
+            {% if shareable %}
+            <label><input id="save" name="save" type="checkbox" value="true">Save</label>
+            {% endif %}
             <br />
             <p style="color:#8B8A68"> version 0.1 </p>
         </div>
         <div class="col-xs-6 col-sm-6">
+            {% if shareable %}
             {% for link in history %}
-                {{ link }} <br>
+                <a href="/{{ link }}"> {{ link }} </a> <br>
             {% endfor %}
+            {% endif %}
             <!-- {{ output[1] }} -->
         </div>    
     </div>
 </div><!-- /.container -->
 </form>
-
+<script>
+window.history.replaceState("object or string", "Title", "/{{ current_url }}");
+</script>
 {% include 'footer.html' %}

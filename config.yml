@@ -1,4 +1,7 @@
 ## Shareable links (yes|true|no|false)
-enable_shareable_links: yes
+# SHAREABLE LINKS BROKEN IN INSIDE CONTAINER, probably a permission setting or so, requires investigation.
+enable_shareable_links: no 
 # How many links to retain at any given time (int)
-link_history_size: 100
+# note that each file created has a limit of 500kb
+# so a link_history_size of 100 will max out at 50MB
+link_history_size: 5

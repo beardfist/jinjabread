@@ -72,58 +72,80 @@ eth0:
     - dns:
         {% for ip in nameservers %}
       - {{ ip }}
-        {% endfor %}
+        {% endfor %} 
 """]}
 
 
-def get_history():
-    ''' returns list of files from history '''
+def _delete_file(filename):
+    ''' delete a file '''
+    
+    os.remove(cache+os.sep+filename)
 
-    files = glob.glob(cache+os.sep+"*")
-    files.sort(key=os.path.getmtime)
-    list_of_links = [f.split(os.sep)[-1] for f in files.__reversed__() ]
-
-    return list_of_links
 
 def _safe_size(payload):
     ''' if file size limit exceeds 500 kb return false '''
+    
     if sys.getsizeof(payload) > 512000:
         return False
     return True
 
+
 def _content_encode(content):
     ''' base64 encode data '''
+    
     return base64.b64encode(content)
+
 
 def _content_decode(content):
     ''' decode base64 data '''
+    
     return base64.b64decode(content)
 
-def _file_write(json, file_link_hash):
-    ''' writes content to file as json '''
+
+def _file_write(base64_string, file_link_hash):
+    ''' writes content to file as base64_string '''
     
     with open(cache+os.sep+file_link_hash, 'wb') as fs:
-        fs.write(json)
+        fs.write(base64_string)
 
     return True
+
 
 def _file_load(file_link_hash):
     ''' return content of file as dictionary '''
     
-    with open(cache+os.sep+file_link_hash, 'rb') as fs:
-        payload = fs.read()
-
+    try:
+        with open(cache+os.sep+file_link_hash, 'rb') as fs:
+            payload = fs.read()
+    except IOError:
+        return False
+    
     return payload
+
 
 def _file_link(json):
     ''' generates hash based on file content '''
 
     return str(hex(hash( json ).__abs__()).replace('0x', "").upper())
 
+
+def get_history(cache_limit):
+    ''' returns list of files from history, and removes the oldest if list exceeds cache limit '''
+
+    files = glob.glob(cache+os.sep+"*")
+    files.sort(key=os.path.getmtime)
+    list_of_links = [ f.split(os.sep)[-1] for f in files.__reversed__() ]
+
+    if len(list_of_links) > cache_limit:
+        _delete_file(list_of_links[-1])
+        list_of_links = list_of_links[:-1]
+
+    return list_of_links
+
+
 def save_content(payload):
     ''' save content to a file if file does not exceed 500kb '''
 
-    # TODO: if at cache file limit, overwrite oldest file
     content = json.dumps(payload, ensure_ascii=False, encoding='utf-8', indent=4)
     data = _content_encode(content)
     
@@ -135,16 +157,22 @@ def save_content(payload):
 
     return link
 
-def load_content(link_id):
-    content = _file_load(link_id)
-    data    = _content_decode(content)
-    payload = json.loads(data, encoding='utf-8') #special characters don't work to well here sadly
 
+def load_content(link_id):
+    ''' get file content, return as dictionary '''
+    
+    content = _file_load(link_id)
+    if content:
+        data = _content_decode(content)
+        payload = json.loads(data, encoding='utf-8') #special characters don't work to well here sadly
+    else:
+        return False
+        
     return payload
 
 
 #link = save_content(payload)
-#get_history()
+#get_history(0)
 #data = load_content(link)
 #from render_state import mash
 #print mash(data['grains'][0], data['pillar'][0], data['state'][0])[0]
