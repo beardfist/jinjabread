@@ -60,7 +60,7 @@ Usage
 
 ```bash
 ~/git$ git clone https://github.com/Inveracity/jinjabread.git
-~/git/src$ python jinjabread.py
+~/git/src$ python3 jinjabread.py
 ```
 
 Browse to `localhost:5000`
