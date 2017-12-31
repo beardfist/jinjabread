@@ -1,4 +1,4 @@
-# jinjabread v0.1
+# jinjabread version 2017.12
 
 >**Disclaimer**: It's an early prototype full of unexpected behavior like throwing nondescript errors when using single quotes when it expects double quotes. I fully intend to rip out the prototype code and replace it with proper salt template rendering code. Just have to find the time to dig into it.
 
