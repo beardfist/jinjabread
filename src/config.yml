@@ -1,0 +1,15 @@
+# SHAREABLE LINKS BROKEN INSIDE CONTAINER, probably a permission setting or so, requires investigation.
+
+# --------------------- Shareable links ---------------------
+#
+# with link_history_enabled set to true, it's possible to save
+# links to states, to share with others.
+#
+# Shareable links (yes|true|no|false)
+link_history_enabled: false 
+# How many links to retain at any given time (int)
+link_history_size: 500
+# set individual file size limit in kilobytes, prevent overload
+link_history_file_size: 10
+#
+#

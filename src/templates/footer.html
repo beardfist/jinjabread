@@ -1,0 +1,121 @@
+<!-- START OF FOOTER -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.12.3.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/codemirror.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jinja2.js')}}"> </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/yaml.js')}}"> </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/simplescrollbars.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/ow.widgets.persistState.js')}}"></script>
+
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("state"), {
+    mode:{ name: "jinja2", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple",
+        viewportMargin: 700
+});
+</script>
+
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("pillar"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("grains"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+  var editor =
+  CodeMirror.fromTextArea(document.getElementById("output"), {
+    mode:{ name: "yaml", 
+           htmlMode: true},
+        theme: "railscasts",
+        lineNumbers: true,
+        tabMode: "spaces",
+        indentWithTabs: false,
+        tabSize: 2,
+        insertSoftTab: 2,
+        indentUnit: 2,
+        gutters: ["CodeMirror-linenumbers", "breakpoints"],
+        scrollbarStyle: "simple"
+});
+</script>
+
+<script>
+editor.setOption("extraKeys", {
+  Tab: function(cm) {
+    var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+    cm.replaceSelection(spaces);
+  }
+});
+</script>
+
+<script>
+function KeyPress(e) {
+      var evtobj = window.event? event : e
+      if (evtobj.keyCode == 66 && evtobj.ctrlKey) document.forms[0].submit();//alert("Ctrl+b");
+}
+
+document.onkeydown = KeyPress;
+</script>
+
+<script>
+$(".resizable").resizable({
+    handles: 'e'
+});
+
+$(function(){
+  $('#persist-state1').persistState();
+})
+
+$(function(){
+  $('#persist-state2').persistState();
+})
+$(function(){
+  $('#persist-state3').persistState();
+})
+$(function(){
+  $('#persist-state4').persistState();
+})
+
+</script>
+
+</body>
+</html> 
