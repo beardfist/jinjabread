@@ -1,44 +1,24 @@
 FROM ubuntu:16.04
 
-# Update
+# Add code to container
+ADD src /
+ADD requirements.txt /
+
+
+# Prerequisites
 RUN apt-get update
+RUN apt-get install -y software-properties-common \
+                       python-software-properties \
+                       curl \
+                       apt-transport-https
 
-# Install app dependencies
-RUN apt-get -y install python
-RUN apt-get -y install python-pip
-RUN pip install --upgrade pip
-RUN pip install Flask
-RUN pip install pyyaml
-RUN apt-get -y install apache2
-RUN apt-get -y install libapache2-mod-wsgi
-RUN apt-get -y install python-dev
+RUN curl -s https://bootstrap.pypa.io/get-pip.py | python3 -
 
-# enable wsgi mod
-RUN a2enmod wsgi
+# Install requirements
+RUN python3 -m pip install -r requirements.txt
 
-# clean temps
+# Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Bundle app source
-RUN mkdir -p /var/www/jinjabread/jinjabread
-
-COPY static/favicon.ico /var/www/jinjabread/jinjabread/favicon.ico
-COPY functions          /var/www/jinjabread/jinjabread/functions
-COPY static             /var/www/jinjabread/jinjabread/static
-COPY templates          /var/www/jinjabread/jinjabread/templates
-COPY config.yml         /var/www/jinjabread/jinjabread/config.yml
-COPY config.py          /var/www/jinjabread/jinjabread/config.py
-COPY __init__.py        /var/www/jinjabread/jinjabread/__init__.py
-
-COPY jinjabread.conf /etc/apache2/sites-available/jinjabread.conf
-
-COPY jinjabread.wsgi /var/www/jinjabread/jinjabread.wsgi
-
-# Enable site in apache
-RUN a2dissite 000-default
-RUN a2ensite jinjabread
-
-RUN service apache2 restart
-
 EXPOSE 80
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+ENTRYPOINT ["gunicorn", "-w", "4", "--worker-connections", "1000", "--timeout", "120", "-b", "0.0.0.0:80", "jinjabread:app"]

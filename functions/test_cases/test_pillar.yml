@@ -1,9 +1,0 @@
-secret: 1A2B3C4D5E6F
-number: 123
-ns:
-  - 12.34.45.1
-  - 12.34.45.2
-nest:
-  bird:
-  - egg1
-  - egg2
