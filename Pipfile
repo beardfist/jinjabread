@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = "*"
+Flask = "*"
+PyYAML = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
+
+[scripts]
+start = "gunicorn -w 4 --worker-connections 1000 --timeout 120 -b 0.0.0.0:80 jinjabread.app:app"
+build = "docker build -t jinjabread:latest -f docker/Dockerfile ."

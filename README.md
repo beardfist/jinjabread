@@ -1,6 +1,6 @@
-# jinjabread version 2017.12
+# jinjabread version 2018.05
 
->**Disclaimer**: It's an early prototype full of unexpected behavior like throwing nondescript errors when using single quotes when it expects double quotes. I fully intend to rip out the prototype code and replace it with proper salt template rendering code. Just have to find the time to dig into it.
+>**Disclaimer**: It's a prototype full of unexpected behavior like throwing nondescript errors when using single quotes when it expects double quotes. I fully intend to rip out the prototype code and replace it with proper salt template rendering code. Just have to find the time to dig into it.
 
 ![jinjabread](http://i.imgur.com/HbGvgSj.png)
 
@@ -49,18 +49,18 @@ Features
 Dependencies
 =============================
 
-python 3.5
-
-```bash
-pip install -r requirements.txt
-```
+python 3.5+
+pipenv 2018+
 
 Usage
 =============================
 
 ```bash
-~/git$ git clone https://github.com/Inveracity/jinjabread.git
-~/git/src$ python3 jinjabread.py
+git clone https://github.com/Inveracity/jinjabread.git
+cd jinjabread
+pip install pipenv
+pipenv sync
+pipenv run start
 ```
 
 Browse to `localhost:5000`
@@ -72,18 +72,13 @@ Docker
 #### Build container
 
 ```bash
-~/git/src$ docker -t jinjabread .
+pipenv run build
 ```
 
 #### Test container
 
 ```bash
-~/git$ docker run -d -p 80:80 --name jinjabread jinjabread
-~/git$ docker ps
-
-    CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS                NAMES
-    b31fb065c2db   jinjabread   "/usr/sbin/apache2ctl"   49 minutes ago   Up 49 minutes   0.0.0.0:80->80/tcp   jinjabread
-
+docker run -d -p 80:80 --name jinjabread jinjabread:latest
 ```
 
 Browse to `localhost/`
