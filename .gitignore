@@ -93,3 +93,6 @@ cache/
 
 # vagrant
 .vagrant/
+
+# virtualenv
+.venv
