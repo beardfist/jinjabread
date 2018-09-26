@@ -23,7 +23,7 @@ or just debugging that one state you just can't seem to fix.
 
 I hope you enjoy it
 
-[Try a demo at www.jinjabread.com](http://www.jinjabread.com/)
+[Try a demo at www.jinjabread.christopherbaklid.com](http://www.jinjabread.com/)
 
 ----------------------------------------------------------------------
 
