@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  jinjabread:
+    image: jinjabread:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: jinjabread
+    restart: always
+    ports:
+      - 8004:80
